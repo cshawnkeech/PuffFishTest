@@ -21,6 +21,7 @@ function draw() {
   pop();
 
   puff1.followMouse();
+  puff1.followTouch();
   puff1.display();
 
 } // end draw

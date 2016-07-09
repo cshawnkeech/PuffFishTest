@@ -272,6 +272,13 @@ function Puff() {
 
   }
 
+  this.followTouch = function () {
+    if (touchIsDown) {
+      this.newTargetX = touchX;
+      this.newTargetY = touchY;
+    }
+  }
+
   this.followMouse = function () {
     text('followMouse', width/2, 100);
     var easing = 0.05;
