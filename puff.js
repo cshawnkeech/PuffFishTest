@@ -15,24 +15,33 @@ function Puff() {
   this.yTranslate = height/2;
   this.newTargetX = width/2;
   this.newTargetY = height/2;
-  this.scaleFactor = 1;
+  this.scaleFactor = 0.625;
   this.rotateFactor = 0;
   this.alphaFactor = 240;
-  this.boundingCircle = 296 * this.scaleFactor;
+  this.boundingCircle = 200 * this.scaleFactor;
   this.speedFactor = 1;
 
   this.display = function() {
 
     angleMode(DEGREES);
 
+    // //test boundingCircle
+    //ellipse(this.xTranslate, this.yTranslate, this.boundingCircle, this.boundingCircle);
+
     push(); //begins Puff
     translate(this.xTranslate, this.yTranslate);
+
+    if (this.xTranslate <= this.newTargetX) {
+      scale(this.scaleFactor, this.scaleFactor);
+    } else if (this.xTranslate > this.newTargetX) {
+      scale(-this.scaleFactor, this.scaleFactor);
+    }
+
     scale(-this.scaleFactor, this.scaleFactor);
     rotate(this.rotateFactor);
 
 
     translate(24 * this.scaleFactor, 22 * this.scaleFactor); //centers fish in bounding circle
-
 
     //dorsal fin
     push(); //push dorsal fin
@@ -265,8 +274,7 @@ function Puff() {
   }; // end this.display
 
   this.newTarget = function() {
-    text('Hi', width/2, 100);
-    
+
     this.newTargetX = mouseX;
     this.newTargetY = mouseY;
 

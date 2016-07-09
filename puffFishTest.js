@@ -4,7 +4,6 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
 
   puff1 = new Puff();
-  puff1.scaleFactor = 0.5;
 
 } // end setup
 
