@@ -27,8 +27,13 @@ function draw() {
 } // end draw
 
 function mouseMoved() {
-puff1.newTarget();
+  puff1.newTarget();
 } // end mouseMoved
+
+function mouseDragged() {
+  puff1.followTouch();
+  return false;
+}
 
 
 function mousePressed() {

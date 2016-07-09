@@ -266,7 +266,7 @@ function Puff() {
 
   this.newTarget = function() {
     text('Hi', width/2, 100);
-
+    
     this.newTargetX = mouseX;
     this.newTargetY = mouseY;
 
