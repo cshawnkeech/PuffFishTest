@@ -13,6 +13,11 @@ display: flex;
   align-items: center;
 }
 
+
+/* this was an attempt at getting the github.io site to hide
+menu bars when on iPhone. it doesn't seem to be successful, but
+also doesn't seem to be giving me any trouble, either, so I
+left it for now... */
 .mdl-layout {
     overflow: visible;
 }
