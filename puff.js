@@ -273,7 +273,7 @@ function Puff() {
   }
 
   this.followTouch = function () {
-    if (touchIsDown) {
+    if (touchIsDown === true) {
       this.newTargetX = touchX;
       this.newTargetY = touchY;
     }
