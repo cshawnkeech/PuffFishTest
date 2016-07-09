@@ -288,7 +288,7 @@ function Puff() {
   }
 
   this.followMouse = function () {
-    text('followMouse', width/2, 100);
+    //text('followMouse', width/2, 100);
     var easing = 0.05;
     // I adapted this from
     // http://coursescript.com/notes/interactivecomputing/animation/
