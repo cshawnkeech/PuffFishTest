@@ -22,11 +22,11 @@ var puff1;
 var puffPercent;
 
 function setup() {
-  //createCanvas(windowWidth,windowHeight);
-  createCanvas (460, 320);
+  createCanvas(windowWidth,windowHeight);
+  //createCanvas (460, 320);
 
   puff1 = new Puff();
-  puff1.scaleFactor = 0.3;
+  puff1.scaleFactor = 0.5;
 
 
 } // end setup
