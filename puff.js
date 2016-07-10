@@ -1,11 +1,5 @@
 
 //Puff constructor
-//noFill();
-//strokeWeight(4);
-//ellipse(width/2, height/2, 296, 296); //bounding circle
-//rectMode(CENTER);
-//rect(width/2 - 5, height/2 - 10,282, 234);
-
 function Puff() {
   // this.red = 235;
   // this.green = 181;
@@ -18,7 +12,7 @@ function Puff() {
   this.scaleFactor = 0.625;
   this.rotateFactor = 0;
   this.alphaFactor = 240;
-  this.boundingCircle = 200 * this.scaleFactor;
+  this.boundingCircle = 180 * this.scaleFactor;
   this.speedFactor = 1;
 
   this.display = function() {
@@ -26,7 +20,7 @@ function Puff() {
     angleMode(DEGREES);
 
     // //test boundingCircle
-    //ellipse(this.xTranslate, this.yTranslate, this.boundingCircle, this.boundingCircle);
+    // ellipse(this.xTranslate, this.yTranslate, this.boundingCircle, this.boundingCircle);
 
     push(); //begins Puff
     translate(this.xTranslate, this.yTranslate);
@@ -41,7 +35,7 @@ function Puff() {
     rotate(this.rotateFactor);
 
 
-    translate(24 * this.scaleFactor, 22 * this.scaleFactor); //centers fish in bounding circle
+    translate(42 * this.scaleFactor, 35 * this.scaleFactor); //centers fish in bounding circle
 
     //dorsal fin
     push(); //push dorsal fin
@@ -136,10 +130,6 @@ function Puff() {
     strokeWeight(3 * abs(this.scaleFactor));
     arc(0, 0, 73, 33, 120, 190);
     pop(); //pop left fin bottom
-
-
-
-
 
     push(); //push tail fin
     translate(-16, -45);
@@ -237,10 +227,7 @@ function Puff() {
     point(-51, -79);
     pop(); // pop right eye pupil
 
-
-
     //fish lips
-
     push(); // push lips
     strokeWeight(3 * abs(this.scaleFactor));
     translate(-111,-44);
@@ -251,7 +238,6 @@ function Puff() {
     pop(); // pop lips
 
     //interior body fin
-
     push(); // push interior body fin
     strokeWeight(3 * abs(this.scaleFactor));
     noFill();
@@ -262,14 +248,7 @@ function Puff() {
     arc(8, 19, 45, 20, -97, 135); //lower arc
     pop(); // pop interior body fin
 
-
-
-
-
-
-
     pop();//end Puff
-    //rotate mode radians command goes here...returns to default
 
   }; // end this.display
 
@@ -309,3 +288,108 @@ function Puff() {
   }
 
 };// end Puff constructor
+
+//TreasureChest constructor
+function TreasureChest() {
+  this.xTranslate = width/2 ;
+  this.yTranslate = height - 70;
+  this.scaleFactor = 0.50;
+  // this.rotateFactor = 0; //currently not used in display
+  this.lidOpen = false;
+
+  this.toggleLid = function() {
+    if (this.lidOpen === true) {
+      this.lidOpen = false;
+    } else if (this.lidOpen === false) {
+      this.lidOpen = true;
+    }
+  }
+
+  this.display = function() {
+
+    push(); //begins TreasureChest
+    rectMode(CENTER);
+    translate(this.xTranslate, this.yTranslate);
+
+    //noFill(); //for test bounding box
+    //rect(0, 0, 286, 260); // for test bounding box
+
+    scale(this.scaleFactor);
+
+    if (this.lidOpen === true) {
+        // chest lid (open)
+        push(); // push chest lid (open)
+        strokeWeight(6);
+
+        //main box lid
+        fill(115, 97, 25);
+        rect(0,-122, 280, 96);
+
+        //plush red interior
+        fill(194, 35, 61);
+        rect(0,-124, 253, 69);
+        pop();
+
+    } else if (this.lidOpen === false) {
+        // chest lid (closed)
+        push(); // push chest lid (closed)
+        strokeWeight(6);
+        fill(115, 97, 25);
+        quad(-120, -128, 120, -128, 140, -70, -140, -70);
+        fill(158, 131, 25);
+        strokeWeight(5);
+        rect(-74,-104, 40, 58);
+        rect(74,-104, 40, 58);
+        rect(0,-104, 40, 58); // center band
+        pop(); //pop chest lid (closed)
+    }
+
+    push(); //push hinges & latches
+    fill(158, 131, 25);
+    strokeWeight(5);
+    rect(-74,-80, 40, 10); // L
+    rect(74,-80, 40, 10); // R
+    pop(); //pop hinges & latches
+
+    //lowerSection
+    push();//push lower section
+    translate(0,30);
+    strokeWeight(6);
+    fill(115, 97, 25);
+    quad(-140, -100, -100, 100, 100, 100, 140,-100); //outer chest
+    fill(158, 131, 25);
+    quad(-114, -80, -80, 80, 80, 80, 114, -80); //inner chest
+    pop(); //pop lower section
+
+    push(); //push skull
+    translate(0, 30);
+    //skull centerpiece
+    strokeWeight(2);
+    fill(201, 201, 201);
+    ellipse(0, -27, 35, 35);//top part
+    noStroke();
+    ellipse(0, -20, 30, 30); //skull center
+
+    stroke(0);
+    fill(0);
+    ellipse(-5, -25, 1.5, 2.5); //L eye
+    ellipse(5, -25, 1.5, 2.5); //R eye
+    ellipse(0, -20, 0.5, 1); //nose
+
+    stroke(158, 131, 25);
+    fill(158, 131, 25);
+    ellipse(-12, -16, 4, 3.5); //L cheek
+    ellipse(12, -16, 4, 3.5); //R cheek
+
+    stroke(0);
+    noFill();
+    arc(-12, -16, 5.50, 6.83, degrees(-2.70), degrees(1.88)); //L cheek outline
+    arc(12, -16, 5.50, 6.83, degrees(1.23), degrees(5.91)); //R cheek outline
+    arc(0, -20, 30, 30, degrees(0.50), degrees(2.62));//jawline
+    pop(); // pop skull
+
+    pop(); //end TreasureChest
+
+  }; // end this.display
+
+};// end TreasureChest constructor
