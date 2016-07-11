@@ -7,7 +7,6 @@ var openClose2;
 var bubble1 = [];
 var travelUp = 0;
 
-
 function preload() {
   //this image by Felipe Skroski, under CC liscence: attribution
   //img = loadImage("https://upload.wikimedia.org/wikipedia/commons/2/2e/Underwater_world.jpg");
@@ -54,8 +53,6 @@ function draw() {
   chest2.display();
 
   bubblesFloat();
-
-
 } // end draw
 
 function mouseMoved() {

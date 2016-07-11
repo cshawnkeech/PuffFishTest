@@ -284,7 +284,7 @@ function Puff() {
       this.yTranslate += dy * easing;
     }
 
-  }
+  }//end this.followMouse
 
 };// end Puff constructor
 
