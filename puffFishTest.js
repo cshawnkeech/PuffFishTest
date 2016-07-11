@@ -67,7 +67,6 @@ function mouseDragged() {
   return false;
 }
 
-
-function mousePressed() {
-  chest1.toggleLid();
-} //end mousePressed
+// function mousePressed() {
+//   chest1.toggleLid();
+// } //end mousePressed
