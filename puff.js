@@ -322,10 +322,13 @@ function TreasureChest() {
     	//open lid and do something
       whichChest.lidOpen = true;
 
-    	//add new bubbles to array
-    	for (var addbubs = 0; addbubs < 5; addbubs++)	{
-  			bubble1.push(new BubbleTest(whichChest));
-  		}//end add new bubbles to array
+    	//add new bubbles to array, max 50 bubbles
+      if (bubble1.length < 50) {
+        for (var addbubs = 0; addbubs < 5; addbubs++)	{
+    			bubble1.push(new BubbleTest(whichChest));
+    		}
+      } //end add new bubbles to array
+
 
       //remove bubbles that have left the screen
       for (var ridbubs = bubble1.length - 1; ridbubs >= 0; ridbubs--) {
