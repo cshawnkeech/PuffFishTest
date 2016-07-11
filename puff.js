@@ -1,4 +1,3 @@
-
 //Puff constructor
 function Puff() {
   // this.red = 235;
@@ -48,7 +47,7 @@ function Puff() {
 
     stroke(0);
     noFill();
-    strokeWeight(3 * abs(this.scaleFactor));
+    strokeWeight(3);
     arc(56, -116, 48, 70, -153, 1);
 
 
@@ -62,7 +61,7 @@ function Puff() {
 
     noFill();
     stroke(0);
-    strokeWeight(3 * abs(this.scaleFactor));
+    strokeWeight(3);
     arc(0, 0, 24, 81, 160, -60);
 
     pop();//pop left arc
@@ -81,7 +80,7 @@ function Puff() {
 
     stroke(0);
     noFill();
-    strokeWeight(3 * abs(this.scaleFactor));
+    strokeWeight(3 );
     arc(0, 0, 27, 71, 60, 105);
     pop(); //pop right ventral fin
 
@@ -96,7 +95,7 @@ function Puff() {
 
     stroke(0);
     noFill();
-    strokeWeight(3 * abs(this.scaleFactor));
+    strokeWeight(3  );
     arc(0, 0, 27, 71, 70, 115);
     pop(); //pop left ventral fin
 
@@ -112,7 +111,7 @@ function Puff() {
 
     stroke(0);
     noFill();
-    strokeWeight(3 * abs(this.scaleFactor));
+    strokeWeight(3);
     arc(0, 0, 99, 30, 155, 310);
     pop(); //pop left fin top
 
@@ -127,7 +126,7 @@ function Puff() {
 
     stroke(0);
     noFill();
-    strokeWeight(3 * abs(this.scaleFactor));
+    strokeWeight(3);
     arc(0, 0, 73, 33, 120, 190);
     pop(); //pop left fin bottom
 
@@ -139,7 +138,7 @@ function Puff() {
     noStroke();
     ellipse(124, -72, 32, 45);
 
-    strokeWeight(3 * abs(this.scaleFactor));
+    strokeWeight(3 );
     stroke(0);
     noFill();
     arc(124, -72, 32, 45, -155, 129);
@@ -161,7 +160,7 @@ function Puff() {
     pop(); //pop tail fin
 
     //Main Body
-    strokeWeight(3 * abs(this.scaleFactor));
+    strokeWeight(3 );
     stroke(0, 0, 0);
     fill(247, 118, 19, 255); // alpha added for demonstration purposes
 
@@ -189,14 +188,14 @@ function Puff() {
     translate(-120, -82);
     rotate(43);
     stroke(0, 0, 0);
-    strokeWeight(3 * abs(this.scaleFactor));
+    strokeWeight(3);
     fill(255, 255, 255);
     ellipse(0, 0, 40, 50);
     pop(); //pop left eye
 
     // left eye pupil
     push(); //push left eye pupil
-    strokeWeight(9 * abs(this.scaleFactor));
+    strokeWeight(9);
     point(-119, -81);
     pop(); //pop left eye pupil
 
@@ -205,7 +204,7 @@ function Puff() {
     push(); // push right eye
     translate(4, 20);
     stroke(0, 0, 0);
-    strokeWeight(3 * abs(this.scaleFactor));
+    strokeWeight(3);
     fill(255, 255, 255);
     beginShape();
         curveVertex(-66,-126);
@@ -223,13 +222,13 @@ function Puff() {
 
     //right eye pupil
     push(); // push right eye pupil
-    strokeWeight(9 * abs(this.scaleFactor));
+    strokeWeight(9);
     point(-51, -79);
     pop(); // pop right eye pupil
 
     //fish lips
     push(); // push lips
-    strokeWeight(3 * abs(this.scaleFactor));
+    strokeWeight(3);
     translate(-111,-44);
     rotate(-36);
     noFill();
@@ -239,7 +238,7 @@ function Puff() {
 
     //interior body fin
     push(); // push interior body fin
-    strokeWeight(3 * abs(this.scaleFactor));
+    strokeWeight(3);
     noFill();
     translate(-25,-14);
     rotate(-14);
@@ -289,6 +288,23 @@ function Puff() {
 
 };// end Puff constructor
 
+//bubbleTest
+function BubbleTest(whichChest) {
+	//bubble1[addbubs].xTranslate += round(random-20, 20);
+	this.xTranslate = whichChest.xTranslate + round(random(-40, 40));
+  this.yTranslate = whichChest.yTranslate;
+
+  this.display = function() {
+
+    push();
+  	stroke(255,255,255,100);
+    fill(255,255,255,70);
+  	ellipse(this.xTranslate, this.yTranslate - 60 - travelUp, 20, 20);
+    pop();
+  }
+
+}//end BubbleTest
+
 //TreasureChest constructor
 function TreasureChest() {
   this.xTranslate = width/2 ;
@@ -297,13 +313,29 @@ function TreasureChest() {
   // this.rotateFactor = 0; //currently not used in display
   this.lidOpen = false;
 
-  this.toggleLid = function() {
-    if (this.lidOpen === true) {
-      this.lidOpen = false;
-    } else if (this.lidOpen === false) {
-      this.lidOpen = true;
+  this.toggleLid = function(whichChest) {
+  	//alert("wth?");
+  	text("lidOpen " + chest1.lidOpen, width/2, 70);
+    if (whichChest.lidOpen === true) {
+      whichChest.lidOpen = false;
+    } else if (whichChest.lidOpen === false) {
+    	//open lid and do something
+      whichChest.lidOpen = true;
+
+    	//add new bubbles to array
+    	for (var addbubs = 0; addbubs < 5; addbubs++)	{
+  			bubble1.push(new BubbleTest(whichChest));
+  		}//end add new bubbles to array
+
+      //remove bubbles that have left the screen
+      for (var ridbubs = bubble1.length - 1; ridbubs >= 0; ridbubs--) {
+      	//console.log(ridbubs);
+      	if (bubble1[ridbubs].yTranslate < 0) {
+        	bubble1.splice(ridbubs, 1);
+        }
+      }//end remove bubbles
     }
-  }
+  }//end this.toggleLid
 
   this.display = function() {
 
@@ -362,6 +394,7 @@ function TreasureChest() {
     pop(); //pop lower section
 
     push(); //push skull
+    angleMode(DEGREES);
     translate(0, 30);
     //skull centerpiece
     strokeWeight(2);
@@ -393,3 +426,20 @@ function TreasureChest() {
   }; // end this.display
 
 };// end TreasureChest constructor
+
+function bubblesFloat() {
+ 	for (var showbubs = 0; showbubs < bubble1.length; showbubs++)	{
+  	bubble1[showbubs].display();
+    bubble1[showbubs].xTranslate;
+    var jiggleDir = floor(random(0,5));
+  	var jiggleAmt = 1.5;
+
+  	if (jiggleDir <= 1) {
+    	bubble1[showbubs].xTranslate = bubble1[showbubs].xTranslate + jiggleAmt;
+  	} else if (jiggleDir <= 3) {
+    	bubble1[showbubs].xTranslate = bubble1[showbubs].xTranslate - jiggleAmt;
+  	} else {
+    	bubble1[showbubs].yTranslate = bubble1[showbubs].yTranslate - jiggleAmt - (round(random(1, 4)));
+  	}
+  }
+}//end bubblesFLoat
